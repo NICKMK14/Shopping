@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import UserProfile from "./UserProfile";
@@ -9,6 +9,9 @@ import UserProfile from "./UserProfile";
 export default function Navbar() {
   const { cart } = useCart();
   const { user } = useAuth();
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav
@@ -16,27 +19,47 @@ export default function Navbar() {
       className="flex justify-between items-center p-4 bg-gray-800 text-white">
       <div className="flex items-center gap-x-4">
         <span className="text-yellow-400 font-bold">Shoppi</span>
-        <Link to="/" className="text-sm text-gray-300 hover:text-white">
+        <Link
+          to="/"
+          className={`text-sm ${
+            isActive("/") ? "text-white font-bold" : "text-gray-300"
+          } hover:text-white`}>
           All
         </Link>
         <Link
-          to="category/cloths"
-          className="text-sm text-gray-300 hover:text-white">
+          to="/category/clothes"
+          className={`text-sm ${
+            isActive("/category/clothes")
+              ? "text-white font-bold"
+              : "text-gray-300"
+          } hover:text-white`}>
           Cloths
         </Link>
         <Link
-          to="category/electronics"
-          className="text-sm text-gray-300 hover:text-white">
+          to="/category/electronics"
+          className={`text-sm ${
+            isActive("/category/electronics")
+              ? "text-white font-bold"
+              : "text-gray-300"
+          } hover:text-white`}>
           Electronics
         </Link>
         <Link
-          to="category/furnitures"
-          className="text-sm text-gray-300 hover:text-white">
+          to="/category/furniture"
+          className={`text-sm ${
+            isActive("/category/furniture")
+              ? "text-white font-bold"
+              : "text-gray-300"
+          } hover:text-white`}>
           Furnitures
         </Link>
         <Link
-          to="category/toys"
-          className="text-sm text-gray-300 hover:text-white">
+          to="/category/miscellaneous"
+          className={`text-sm ${
+            isActive("/category/miscellaneous")
+              ? "text-white font-bold"
+              : "text-gray-300"
+          } hover:text-white`}>
           Toys
         </Link>
       </div>

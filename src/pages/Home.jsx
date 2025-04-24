@@ -4,18 +4,23 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAllProducts } from "../services/api";
 import ProductsCard from "../components/ProductsCart";
+import { useProducts } from "../context/ProductsContext";
 
 export default function Home() {
   const { category } = useParams();
-  const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const { products, setProducts } = useProducts();
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    getAllProducts().then((res) => {
-      setProducts(res.data);
-      setFilteredProducts(res.data);
-    });
-  }, []);
+    if (products.length === 0) {
+      setIsLoading(true);
+      getAllProducts()
+        .then((res) => setProducts(res.data))
+        .finally(() => setIsLoading(false));
+    }
+  }, [products, setProducts]);
 
   useEffect(() => {
     const filteredByCategory = category
@@ -34,6 +39,7 @@ export default function Home() {
 
   return (
     <div className="p-4">
+      {isLoading && <p className="text-center text-gray-500">Loading...</p>}
       <div className="mb-4">
         <input
           type="text"

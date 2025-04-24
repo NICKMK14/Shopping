@@ -7,13 +7,16 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "./context/CartContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { ProductsProvider } from "./context/ProductsContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
-          <App />
+          <ProductsProvider>
+            <App />
+          </ProductsProvider>
         </CartProvider>
       </AuthProvider>
     </BrowserRouter>
