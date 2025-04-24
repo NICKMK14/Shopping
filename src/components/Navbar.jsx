@@ -14,9 +14,7 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav
-      style={{ backgroundColor: "gray" }}
-      className="flex justify-between items-center p-4 bg-gray-800 text-white">
+    <nav className="flex justify-between items-center p-4 bg-gray-500 text-white sticky top-0 z-50 shadow-md">
       <div className="flex items-center gap-x-4">
         <span className="text-yellow-400 font-bold">Shoppi</span>
         <Link

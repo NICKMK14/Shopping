@@ -9,8 +9,6 @@ import Checkout from "./pages/Checkout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
-  const [user, setUser] = useState(null);
-
   return (
     <>
       <Navbar />
